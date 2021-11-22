@@ -11,6 +11,8 @@
 	<title>Login</title>
 </h:head>
 <h:body>
+	#{loginController.usuario}<br/>
+	#{loginController.telefone}
 	<h1 class="text-center">Cadastro</h1>
 	<h:form>
 		<div class="auth-container">
@@ -44,7 +46,7 @@
 				</div>
 				
 				<div class="mt-3">				
-					<p:selectOneMenu id="labeled" value="#{selectOneMenuView.labeled}" label="Always Show Label"
+					<p:selectOneMenu id="labeled" label="Always Show Label"
 	                                alwaysDisplayLabel="true">
 	                    <f:selectItems/>
 	                </p:selectOneMenu>
