@@ -1,4 +1,4 @@
-package br.com.gustavo.model;
+package br.com.gustavo.dominio.model;
 
 public class Telefone {
 	private Integer ddd;

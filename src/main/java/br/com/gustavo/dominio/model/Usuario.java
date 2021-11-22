@@ -1,4 +1,4 @@
-package br.com.gustavo.model;
+package br.com.gustavo.dominio.model;
 
 import java.util.ArrayList;
 import java.util.List;
