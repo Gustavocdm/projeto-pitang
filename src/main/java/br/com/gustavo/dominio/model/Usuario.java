@@ -1,4 +1,4 @@
-package br.com.gustavo.dominio.model;
+ package br.com.gustavo.dominio.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,8 +25,14 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="usuario_id")
 	private Integer id;
+	
+	@Column(nullable = false)
 	private String nome;
+	
+	@Column(nullable = false)
 	private String email;
+	
+	@Column(nullable = false)
 	private String senha;
 	
 	@OneToMany(mappedBy = "usuario", orphanRemoval = true)

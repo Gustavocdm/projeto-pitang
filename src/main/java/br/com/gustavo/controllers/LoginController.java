@@ -35,36 +35,29 @@ public class LoginController implements Serializable {
 		System.out.println("Finalizou operacão");
 		
 		em.persist(usuario);
-		em.getTransaction().commit();		
+		em.flush();		
 		
 		Telefone telefone1 = new Telefone();
 		Telefone telefone2 = new Telefone();
 		
-		this.usuario = em.find(Usuario.class, 1);
-		
 		telefone1.setDdd(81);
 		telefone1.setNumero("998450718");
 		telefone1.setTipo("celular");
-		telefone1.setUsuario(this.usuario);
+		telefone1.setUsuario(usuario);
 		
 		telefone2.setDdd(81);
 		telefone2.setNumero("32715463");
 		telefone2.setTipo("fixo");
-		telefone2.setUsuario(this.usuario);
-		
-		
-		em.getTransaction().begin();
+		telefone2.setUsuario(usuario);
 		
 		em.persist(telefone1);
 		em.persist(telefone2);
 		
 		
-		this.telefone= em.find(Telefone.class, 1);
-		
 		em.getTransaction().commit();
 		
-		em.close();
-		emf.close();
+		this.usuario = em.find(Usuario.class, 1);
+		this.telefone= em.find(Telefone.class, 2);
 	}
 	
 	public Usuario getUsuario() {
