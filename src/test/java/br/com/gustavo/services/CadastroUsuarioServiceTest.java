@@ -2,9 +2,10 @@ package br.com.gustavo.services;
 
 import static br.com.gustavo.builders.UsuarioBuilder.umUsuario;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.anyString;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class CadastroUsuarioServiceTest {
 	
 	@Test
 	public void deveSetarHashNaSenhaDoUsuario() {
-		 when(sut.hasher.hash(anyString())).thenReturn("hash");
+		 when(hasher.hash(anyString())).thenReturn("hash");
 		
 		Usuario usuario = umUsuario().pegar();
 		
@@ -43,5 +44,22 @@ public class CadastroUsuarioServiceTest {
 		assertEquals("hash", usuario.getSenha());
 	}
 	
+	@Test
+	public void deveChamarHasherComASenhaCorretaDoUsuario() {
+		
+	}
+	
+	@Test
+	public void deveRetornarOUsuarioCriadoPeloRepository() {
+		Usuario usuarioPassadoNoSut = umUsuario().comId(10).pegar();
+		
+		Usuario usuarioRetornoRepository = umUsuario().comId(5).pegar();
+		
+		when(createRepository.create(any())).thenReturn(usuarioRetornoRepository);
+		
+		Usuario usuarioRetornadoPeloSut = sut.create(usuarioPassadoNoSut);
+		
+		assertEquals(usuarioRetornoRepository, usuarioRetornadoPeloSut);
+	}
 	
 }
