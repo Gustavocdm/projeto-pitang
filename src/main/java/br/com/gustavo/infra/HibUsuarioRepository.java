@@ -2,13 +2,16 @@ package br.com.gustavo.infra;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import br.com.gustavo.dominio.model.Usuario;
 import br.com.gustavo.services.protocols.UsuarioRepository;
 
 public class HibUsuarioRepository implements UsuarioRepository {
 	
+	@Inject
 	EntityManager em;
 
 	@Override
@@ -16,13 +19,14 @@ public class HibUsuarioRepository implements UsuarioRepository {
 		em.getTransaction().begin();
 		em.persist(entity);
 		em.getTransaction().commit();
-		return null;
+		return entity;
 	}
 
 	@Override
 	public void delete(Usuario entity) {
-		// TODO Auto-generated method stub
-		
+		em.getTransaction().begin();
+		em.remove(findById(entity.getId()));
+		em.getTransaction().commit();		
 	}
 
 	@Override
@@ -32,20 +36,24 @@ public class HibUsuarioRepository implements UsuarioRepository {
 
 	@Override
 	public List<Usuario> list() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "select c from Usuario c";
+		TypedQuery<Usuario> typedQuery = em.createQuery(query, Usuario.class);
+		return typedQuery.getResultList();
 	}
 
 	@Override
 	public Usuario update(Usuario entity) {
-		// TODO Auto-generated method stub
+		em.getTransaction().begin();
+		em.merge(entity);
+		em.getTransaction().commit();
 		return null;
 	}
 
 	@Override
 	public Usuario findByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "select c from Usuario c where email = :email";
+		TypedQuery<Usuario> typedQuery = em.createQuery(query, Usuario.class).setParameter("email", email);
+		return typedQuery.getSingleResult();
 	}
 
 }
