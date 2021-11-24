@@ -59,6 +59,15 @@ public class CadastroUsuarioServiceTest {
 	}
 	
 	@Test
+	public void deveChamarRepositoryComOUsuarioPassado() {
+		Usuario usuario = umUsuario().comId(4).pegar();
+		
+		sut.create(usuario);
+
+		verify(createRepository).create(usuario);
+	}
+	
+	@Test
 	public void deveRetornarOUsuarioCriadoPeloRepository() {
 		Usuario usuarioPassadoNoSut = umUsuario().comId(10).pegar();
 		

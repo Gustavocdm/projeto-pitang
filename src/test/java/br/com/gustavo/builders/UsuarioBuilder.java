@@ -25,6 +25,11 @@ public class UsuarioBuilder {
 		return this;
 	}
 	
+	public UsuarioBuilder comSenha(String senha) {
+		usuario.setSenha(senha);
+		return this;
+	}
+	
 	public Usuario pegar() {
 		return usuario;
 	}
