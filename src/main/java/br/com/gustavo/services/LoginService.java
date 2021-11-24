@@ -24,6 +24,11 @@ public class LoginService implements Login {
 		if (usuario == null) {
 			return false;
 		}
+		
+		if (! compararHash.compararHash(senha, usuario.getSenha())) {
+			return false;
+		}
+		
 		return true;
 	}
 
