@@ -1,5 +1,5 @@
 package br.com.gustavo.services.protocols;
 
-public interface CompararHasher {
+public interface CompararHash {
 	public boolean compararHash(String valor, String hash);
 }
