@@ -42,4 +42,10 @@ public class HibUsuarioRepository implements UsuarioRepository {
 		return null;
 	}
 
+	@Override
+	public Usuario findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
