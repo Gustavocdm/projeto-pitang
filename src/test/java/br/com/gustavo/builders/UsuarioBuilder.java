@@ -20,6 +20,11 @@ public class UsuarioBuilder {
 		return builder;
 	}
 	
+	public UsuarioBuilder comId(Integer id) {
+		usuario.setId(id);
+		return this;
+	}
+	
 	public Usuario pegar() {
 		return usuario;
 	}
