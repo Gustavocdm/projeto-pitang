@@ -2,11 +2,13 @@ package br.com.gustavo.services;
 
 import static br.com.gustavo.builders.UsuarioBuilder.umUsuario;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -45,11 +47,6 @@ public class CadastroUsuarioServiceTest {
 	}
 	
 	@Test
-	public void deveChamarHasherComASenhaCorretaDoUsuario() {
-		
-	}
-	
-	@Test
 	public void deveRetornarOUsuarioCriadoPeloRepository() {
 		Usuario usuarioPassadoNoSut = umUsuario().comId(10).pegar();
 		
@@ -60,6 +57,21 @@ public class CadastroUsuarioServiceTest {
 		Usuario usuarioRetornadoPeloSut = sut.create(usuarioPassadoNoSut);
 		
 		assertEquals(usuarioRetornoRepository, usuarioRetornadoPeloSut);
+	}
+	
+	@Test
+	public void deveLancarExcecaoSeEntityCreateLancarExcecao() {
+		Usuario usuario = umUsuario().pegar();
+		
+		when(createRepository.create(any())).thenThrow(new RuntimeException("mensagem"));
+		
+		try {
+			sut.create(usuario);
+			Assert.fail();
+		}
+		catch (RuntimeException e) {
+			assertTrue(true);
+		}
 	}
 	
 }
