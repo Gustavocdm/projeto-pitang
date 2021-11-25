@@ -8,57 +8,67 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<h:outputStylesheet library="css" name="styles.css" />
-	<title>Login</title>
+	<title>Cadastro</title>
 </h:head>
 <h:body>
-	#{loginController.usuario}<br/>
-	#{loginController.telefone}
 	<h1 class="text-center">Cadastro</h1>
 	<h:form>
 		<div class="auth-container">
 			<p:card styleClass="mt-5">
 
 				<h5>Nome</h5>
-				<p:inputText />
+				<p:inputText value="#{cadastroController.usuario.nome}" />
 
 				<h5>Email</h5>
-				<p:inputText />
+				<p:inputText value="#{cadastroController.usuario.email}" />
 
 				<h5>Senha</h5>
-				<p:password id="nonFeedback" />
+				<p:password value="#{cadastroController.usuario.senha}" />
 
-				<h5>Telefones</h5>
+				<h5>
+					Telefones
+					<p:commandButton icon="pi pi-plus"
+						styleClass="rounded-button ui-button-success"
+						action="#{cadastroController.addTelefone()}" ajax="false" />
+				</h5>
 
-				<div class="form-ddd-telefone">
+				<ui:repeat var="telefone"
+					value="#{cadastroController.usuario.telefones}"
+					varStatus="status">
+					<div class="form-ddd-telefone">
 
-					<div class="ui-inputgroup">
-						<div class="ui-inputgroup-addon">DDD</div>
-						<p:inputText styleClass="ddd-input" />
-					</div>
-
-					<div class="ui-inputgroup">
-						<div class="ui-inputgroup-addon">
-							<i class="pi pi-phone"></i>
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">DDD</div>
+							<p:inputText styleClass="ddd-input" value="#{telefone.ddd}" />
 						</div>
-						<p:inputText />
+
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">
+								<i class="pi pi-phone"></i>
+							</div>
+							<p:inputText value="#{telefone.numero}" />
+						</div>
+
 					</div>
 
-				</div>
-				
-				<div class="mt-3">				
-					<p:selectOneMenu id="labeled" label="Always Show Label"
-	                                alwaysDisplayLabel="true">
-	                    <f:selectItems/>
-	                </p:selectOneMenu>
-	
-					<p:commandButton type="button" icon="pi pi-plus"
-						styleClass="rounded-button ui-button-success ml-2" />
-				</div>
-				
+					<div style="margin-bottom: 10px; margin-top: 5px;">
+						<p:selectOneMenu id="option" 
+							value="#{telefone.tipo}">
+							<f:selectItem itemLabel="Celular" itemValue="celular" />
+							<f:selectItem itemLabel="Fixo" itemValue="fixo" />
+						</p:selectOneMenu>
+
+						<p:commandButton icon="pi pi-trash"
+							styleClass="rounded-button ui-button-danger ml-2"
+							action="#{cadastroController.removeTelefone(status.index)}"
+							ajax="false" />
+					</div>
+				</ui:repeat>
 
 				<div>
 					<p:commandButton value="Cadastrar"
-						styleClass="ui-button-success mt-3" />
+						styleClass="ui-button-success mt-3"
+						action="#{cadastroController.cadastrar()}" />
 				</div>
 			</p:card>
 
