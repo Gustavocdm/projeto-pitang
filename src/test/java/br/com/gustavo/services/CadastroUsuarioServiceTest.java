@@ -22,7 +22,7 @@ import br.com.gustavo.services.protocols.UsuarioRepository;
 public class CadastroUsuarioServiceTest {
 	
 	@InjectMocks
-	CadastroUsuarioService sut;
+	UsuarioService sut;
 	
 	@Mock
 	Hasher hasher;
