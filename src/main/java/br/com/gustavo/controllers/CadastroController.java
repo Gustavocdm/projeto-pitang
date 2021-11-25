@@ -30,13 +30,17 @@ public class CadastroController implements Serializable {
 	
 	public String cadastrar() {
 		try {
-			cadastroUsuario.cadastrarUsuario(usuario);
+			usuario = cadastroUsuario.cadastrarUsuario(usuario);
+			
+			if (usuario != null) {
+				return "login?faces-redirect=true";
+			}
 		}
 		catch(Exception e) {
 			return "";
 		}
 		
-		return "dawdwa";
+		return "";
 	}
 
 	public Usuario getUsuario() {
