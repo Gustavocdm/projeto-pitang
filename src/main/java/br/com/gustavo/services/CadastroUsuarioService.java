@@ -1,33 +1,34 @@
 package br.com.gustavo.services;
 
+import java.io.Serializable;
+
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import br.com.gustavo.dominio.model.Usuario;
-import br.com.gustavo.dominio.usecases.EntityCreate;
+import br.com.gustavo.dominio.usecases.CadastroUsuario;
 import br.com.gustavo.services.protocols.Hasher;
+import br.com.gustavo.services.protocols.UsuarioRepository;
 
-public class CadastroUsuarioService implements EntityCreate<Usuario> {
-	
-	Hasher hasher;
-	EntityCreate<Usuario> createRepository;
+@Dependent
+public class CadastroUsuarioService implements CadastroUsuario, Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private Hasher hasher;
 	
 	@Inject
-	public CadastroUsuarioService(Hasher hasher, EntityCreate<Usuario> createRepository) {
-		this.hasher = hasher;
-		this.createRepository = createRepository;
-	}
+	private UsuarioRepository usuarioRepository;
 	
-	@Inject 
-
 	@Override
-	public Usuario create(Usuario entity) {
+	public Usuario cadastrarUsuario(Usuario entity) {
 		String senhaHash = hasher.hash(entity.getSenha());
 		entity.setSenha(senhaHash);
 		
-		Usuario usuario = createRepository.create(entity);
+		Usuario usuario = usuarioRepository.create(entity);
 		
 		return usuario;
 	}
 	
 	
-}
+} 
