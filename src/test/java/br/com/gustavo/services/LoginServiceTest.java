@@ -51,7 +51,7 @@ public class LoginServiceTest {
 
 	
 	@Test
-	public void deveChamarCompararHashComEmailESenhaPassados() {
+	public void deveChamarCompararHashComASenhaPassada() {
 		
 		Usuario usuario = umUsuario().comSenha("senha_entidade").pegar();
 		
@@ -66,10 +66,6 @@ public class LoginServiceTest {
 	
 	@Test
 	public void deveRetornarFalseSeSenhaNaoBaterComHash() {
-		Usuario usuario = umUsuario().pegar();
-		
-		when(usuarioRepository.findByEmail(anyString())).thenReturn(usuario);
-		
 		when(compararHash.compararHash(anyString(), anyString())).thenReturn(false);
 		
 		boolean login = sut.logar("email", "senha");

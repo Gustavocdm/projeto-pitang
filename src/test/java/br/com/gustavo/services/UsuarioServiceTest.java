@@ -19,7 +19,7 @@ import br.com.gustavo.dominio.model.Usuario;
 import br.com.gustavo.services.protocols.Hasher;
 import br.com.gustavo.services.protocols.UsuarioRepository;
 
-public class CadastroUsuarioServiceTest {
+public class UsuarioServiceTest {
 	
 	@InjectMocks
 	UsuarioService sut;
