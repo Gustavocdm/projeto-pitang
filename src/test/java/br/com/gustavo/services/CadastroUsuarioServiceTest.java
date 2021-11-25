@@ -16,8 +16,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import br.com.gustavo.dominio.model.Usuario;
-import br.com.gustavo.dominio.usecases.EntityCreate;
 import br.com.gustavo.services.protocols.Hasher;
+import br.com.gustavo.services.protocols.UsuarioRepository;
 
 public class CadastroUsuarioServiceTest {
 	
@@ -28,7 +28,7 @@ public class CadastroUsuarioServiceTest {
 	Hasher hasher;
 	
 	@Mock
-	EntityCreate<Usuario> createRepository;
+	UsuarioRepository usuarioRepository;
 	
 	
 	@Before
@@ -42,7 +42,7 @@ public class CadastroUsuarioServiceTest {
 
 		String senha = usuario.getSenha();
 		
-		sut.create(usuario);
+		sut.cadastrarUsuario(usuario);
 
 		verify(hasher).hash(senha);
 	}
@@ -53,7 +53,7 @@ public class CadastroUsuarioServiceTest {
 		
 		Usuario usuario = umUsuario().pegar();
 		
-		sut.create(usuario);
+		sut.cadastrarUsuario(usuario);
 		
 		assertEquals("hash", usuario.getSenha());
 	}
@@ -62,9 +62,9 @@ public class CadastroUsuarioServiceTest {
 	public void deveChamarRepositoryComOUsuarioPassado() {
 		Usuario usuario = umUsuario().comId(4).pegar();
 		
-		sut.create(usuario);
+		sut.cadastrarUsuario(usuario);
 
-		verify(createRepository).create(usuario);
+		verify(usuarioRepository).create(usuario);
 	}
 	
 	@Test
@@ -73,9 +73,9 @@ public class CadastroUsuarioServiceTest {
 		
 		Usuario usuarioRetornoRepository = umUsuario().comId(5).pegar();
 		
-		when(createRepository.create(any())).thenReturn(usuarioRetornoRepository);
+		when(usuarioRepository.create(any())).thenReturn(usuarioRetornoRepository);
 		
-		Usuario usuarioRetornadoPeloSut = sut.create(usuarioPassadoNoSut);
+		Usuario usuarioRetornadoPeloSut = sut.cadastrarUsuario(usuarioPassadoNoSut);
 		
 		assertEquals(usuarioRetornoRepository, usuarioRetornadoPeloSut);
 	}
@@ -84,10 +84,10 @@ public class CadastroUsuarioServiceTest {
 	public void deveLancarExcecaoSeEntityCreateLancarExcecao() {
 		Usuario usuario = umUsuario().pegar();
 		
-		when(createRepository.create(any())).thenThrow(new RuntimeException("mensagem"));
+		when(usuarioRepository.create(any())).thenThrow(new RuntimeException("mensagem"));
 		
 		try {
-			sut.create(usuario);
+			sut.cadastrarUsuario(usuario);
 			Assert.fail();
 		}
 		catch (RuntimeException e) {

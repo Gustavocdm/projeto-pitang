@@ -1,7 +1,9 @@
 package br.com.gustavo.infra;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -9,7 +11,9 @@ import javax.persistence.TypedQuery;
 import br.com.gustavo.dominio.model.Usuario;
 import br.com.gustavo.services.protocols.UsuarioRepository;
 
-public class HibUsuarioRepository implements UsuarioRepository {
+@RequestScoped
+public class HibUsuarioRepository implements UsuarioRepository, Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Inject
 	EntityManager em;

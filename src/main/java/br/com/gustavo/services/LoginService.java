@@ -5,18 +5,15 @@ import javax.inject.Inject;
 import br.com.gustavo.dominio.model.Usuario;
 import br.com.gustavo.dominio.usecases.Login;
 import br.com.gustavo.services.protocols.CompararHash;
-import br.com.gustavo.services.protocols.FindUserByEmail;
+import br.com.gustavo.services.protocols.UsuarioRepository;
 
 public class LoginService implements Login {
 	
+	@Inject
 	private CompararHash compararHash;
-	private FindUserByEmail usuarioRepository;
 	
 	@Inject
-	public LoginService(CompararHash compararHash, FindUserByEmail usuarioRepository) {
-		this.compararHash = compararHash;
-		this.usuarioRepository = usuarioRepository;
-	}
+	private UsuarioRepository usuarioRepository;
 
 	@Override
 	public boolean logar(String email, String senha) {

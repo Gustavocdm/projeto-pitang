@@ -14,7 +14,7 @@ import org.mockito.Mock;
 
 import br.com.gustavo.dominio.model.Usuario;
 import br.com.gustavo.services.protocols.CompararHash;
-import br.com.gustavo.services.protocols.FindUserByEmail;
+import br.com.gustavo.services.protocols.UsuarioRepository;
 
 public class LoginServiceTest {
 	@InjectMocks
@@ -24,7 +24,7 @@ public class LoginServiceTest {
 	CompararHash compararHash;
 	
 	@Mock
-	FindUserByEmail usuarioRepository;
+	UsuarioRepository usuarioRepository;
 	
 	@Before
 	public void setup() {

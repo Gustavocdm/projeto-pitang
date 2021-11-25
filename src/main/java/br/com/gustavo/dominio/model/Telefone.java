@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 public class Telefone implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +26,7 @@ public class Telefone implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "usuario_possui_telefone_fk"))
+	@Cascade(CascadeType.ALL)
 	private Usuario usuario;
 	
 	
