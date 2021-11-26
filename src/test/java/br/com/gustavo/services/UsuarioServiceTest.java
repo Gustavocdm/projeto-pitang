@@ -4,7 +4,9 @@ import static br.com.gustavo.builders.UsuarioBuilder.umUsuario;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -95,4 +97,35 @@ public class UsuarioServiceTest {
 		}
 	}
 	
+	@Test
+	public void deveCriarHashDeSenhaNoUpdateSeUsuarioModificouSenha() {
+		String senha = "senha";
+		Usuario usuario = umUsuario().comSenha(senha).pegar();
+				
+		sut.atualizar(usuario);
+		
+		verify(hasher).hash(senha);
+	}
+	
+	@Test
+	public void devePegarUsuarioDoRepositoryFindByIdSeSenhaNaoAlterado() {
+		Usuario usuario = umUsuario().semSenha().pegar();
+		
+		when(usuarioRepository.findById(anyInt())).thenReturn(usuario);
+		
+		sut.atualizar(usuario);
+		
+		verify(usuarioRepository, times(1)).findById(anyInt());
+	}
+	
+	@Test
+	public void deveRetornarUsuarioCorretoAoAtualizar() {
+		Usuario usuario = umUsuario().pegar();
+		
+		when(usuarioRepository.update(any())).thenReturn(usuario);
+		
+		Usuario usuarioRetornado = sut.atualizar(usuario);
+		
+		assertEquals(usuario, usuarioRetornado);
+	}
 }
