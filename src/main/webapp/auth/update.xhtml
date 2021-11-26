@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="styles.css" />
+	<title>Update</title>
+</h:head>
+<h:body>
+	<h1 class="text-center">Atualizar Dados</h1>
+	<h:form>
+		<div class="auth-container">
+			<p:card styleClass="mt-5">
+
+				<h5>Nome</h5>
+				<p:inputText value="#{updateController.usuario.nome}" />
+
+				<h5>Senha</h5>
+				<p:password value="#{updateController.usuario.senha}" />
+
+				<h5>
+					Telefones
+					<p:commandButton icon="pi pi-plus"
+						styleClass="rounded-button ui-button-success"
+						action="#{updateController.addTelefone()}" ajax="false" />
+				</h5>
+
+				<ui:repeat var="telefone"
+					value="#{updateController.usuario.telefones}"
+					varStatus="status">
+					<div class="form-ddd-telefone">
+
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">DDD</div>
+							<p:inputText styleClass="ddd-input" value="#{telefone.ddd}" />
+						</div>
+
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">
+								<i class="pi pi-phone"></i>
+							</div>
+							<p:inputText value="#{telefone.numero}" />
+						</div>
+
+					</div>
+
+					<div style="margin-bottom: 10px; margin-top: 5px;">
+						<p:selectOneMenu id="option" 
+							value="#{telefone.tipo}">
+							<f:selectItem itemLabel="Celular" itemValue="celular" />
+							<f:selectItem itemLabel="Fixo" itemValue="fixo" />
+						</p:selectOneMenu>
+
+						<p:commandButton icon="pi pi-trash"
+							styleClass="rounded-button ui-button-danger ml-2"
+							action="#{updateController.removeTelefone(status.index)}"
+							ajax="false" />
+					</div>
+				</ui:repeat>
+
+				<div>
+					<p:commandButton value="Salvar"
+						styleClass="ui-button-success mt-3"
+						action="#{updateController.update()}" />
+				</div>
+			</p:card>
+
+			<div class="mt-5">
+				<p:commandButton value="Home" icon="pi pi-home" styleClass="ui-button-success" ajax="false" action="/auth/index.xhtml?faces-redirect=true" />
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>
