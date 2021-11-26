@@ -2,6 +2,7 @@ package br.com.gustavo.services;
 
 import static br.com.gustavo.builders.UsuarioBuilder.umUsuario;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,12 +42,12 @@ public class LoginServiceTest {
 	}
 	
 	@Test
-	public void deveRetornarFalseSeUsuarioNaoEncontrado() {
+	public void deveRetornarNullSeUsuarioNaoEncontrado() {
 		when(usuarioRepository.findByEmail(anyString())).thenReturn(null);
 		
-		boolean login = sut.logar("email", "senha");
+		Usuario usuarioLogin = sut.logar("email", "senha");
 		
-		assertFalse(login);
+		assertNull(usuarioLogin);
 	}
 
 	
@@ -65,12 +66,12 @@ public class LoginServiceTest {
 	}
 	
 	@Test
-	public void deveRetornarFalseSeSenhaNaoBaterComHash() {
+	public void deveRetornarNullSeSenhaNaoBaterComHash() {
 		when(compararHash.compararHash(anyString(), anyString())).thenReturn(false);
 		
-		boolean login = sut.logar("email", "senha");
+		Usuario usuarioLogin = sut.logar("email", "senha");
 		
-		assertFalse(login);
+		assertNull(usuarioLogin);
 	}
 	
 }

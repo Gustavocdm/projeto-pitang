@@ -7,6 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.gustavo.controllers.sessao.LoginSessao;
 import br.com.gustavo.dominio.model.Telefone;
 import br.com.gustavo.dominio.model.Usuario;
 import br.com.gustavo.dominio.usecases.CadastroUsuario;
@@ -22,6 +23,9 @@ public class CadastroController implements Serializable {
 	@Inject
 	private CadastroUsuario cadastroUsuario;
 	
+	@Inject
+	private LoginSessao loginSessao;
+	
 	
 	@PostConstruct
 	public void setup() {
@@ -33,7 +37,8 @@ public class CadastroController implements Serializable {
 			usuario = cadastroUsuario.cadastrarUsuario(usuario);
 			
 			if (usuario != null) {
-				return "login?faces-redirect=true";
+				loginSessao.logarUsuarioNaSessao(usuario);
+				return "/auth/index.xhtml?faces-redirect=true";
 			}
 		}
 		catch(Exception e) {
