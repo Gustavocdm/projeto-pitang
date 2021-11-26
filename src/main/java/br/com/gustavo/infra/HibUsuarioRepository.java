@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import br.com.gustavo.dominio.model.Telefone;
 import br.com.gustavo.dominio.model.Usuario;
 import br.com.gustavo.services.protocols.UsuarioRepository;
 
@@ -22,6 +23,10 @@ public class HibUsuarioRepository implements UsuarioRepository, Serializable {
 	public Usuario create(Usuario entity) {
 		em.getTransaction().begin();
 		em.persist(entity);
+		em.flush();
+		for (Telefone telefone : entity.getTelefones()) {
+			telefone.setUsuario(entity);
+		}
 		em.getTransaction().commit();
 		return entity;
 	}
@@ -50,7 +55,7 @@ public class HibUsuarioRepository implements UsuarioRepository, Serializable {
 		em.getTransaction().begin();
 		em.merge(entity);
 		em.getTransaction().commit();
-		return null;
+		return entity;
 	}
 
 	@Override
