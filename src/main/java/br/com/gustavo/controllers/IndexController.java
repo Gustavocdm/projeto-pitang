@@ -8,7 +8,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.gustavo.controllers.sessao.LoginSessao;
 import br.com.gustavo.dominio.model.Usuario;
+import br.com.gustavo.dominio.usecases.DeletarEntidade;
 import br.com.gustavo.dominio.usecases.ListarEntidades;
 
 @Named
@@ -19,19 +21,24 @@ public class IndexController implements Serializable {
 	@Inject
 	private ListarEntidades<Usuario> listarUsuarios;
 	
+	@Inject DeletarEntidade<Usuario> deletarUsuario;
+	
+	@Inject
+	LoginSessao loginSessao;
+	
 	private List<Usuario> usuarios;
 	
 	
 	@PostConstruct
 	public void setup() {
-		System.out.println("Hello World!");		
 		usuarios = listarUsuarios.listar();
-		for (Usuario usuario : usuarios) {
-			System.out.println(usuario);
-		}
 	}
 
-
+	public String deletarUsuario() {
+		deletarUsuario.deletar(loginSessao.getUsuarioLogado());
+		return loginSessao.deslogarUsuarioDaSessao();
+	}
+	
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -39,7 +46,4 @@ public class IndexController implements Serializable {
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-	
-	
-
 }
