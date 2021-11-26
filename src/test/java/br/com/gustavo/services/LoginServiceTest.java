@@ -1,7 +1,6 @@
 package br.com.gustavo.services;
 
 import static br.com.gustavo.builders.UsuarioBuilder.umUsuario;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;

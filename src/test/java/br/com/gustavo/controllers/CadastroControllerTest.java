@@ -27,9 +27,6 @@ public class CadastroControllerTest {
 	@Mock
 	LoginSessao loginSessao;
 	
-	@Mock
-	Usuario usuarioSut;
-	
 	@Before
 	public void setup() {
 		initMocks(this);
