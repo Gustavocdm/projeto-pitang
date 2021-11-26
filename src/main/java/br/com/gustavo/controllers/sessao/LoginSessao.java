@@ -18,8 +18,9 @@ public class LoginSessao implements Serializable {
 		usuarioLogado = usuario;
 	}
 	
-	public void deslogarUsuarioDaSessao() {
+	public String deslogarUsuarioDaSessao() {
 		usuarioLogado = null;
+		return "/login.xhtml";
 	}
 
 	public Usuario getUsuarioLogado() {
