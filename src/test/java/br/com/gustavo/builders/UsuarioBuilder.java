@@ -13,6 +13,7 @@ public class UsuarioBuilder {
 	public static UsuarioBuilder umUsuario() {
 		UsuarioBuilder builder = new UsuarioBuilder();
 		builder.usuario = new Usuario();
+		builder.usuario.setId(1);
 		builder.usuario.setNome("nome");
 		builder.usuario.setEmail("email");
 		builder.usuario.setSenha("senha");
@@ -27,6 +28,11 @@ public class UsuarioBuilder {
 	
 	public UsuarioBuilder comSenha(String senha) {
 		usuario.setSenha(senha);
+		return this;
+	}
+	
+	public UsuarioBuilder semSenha() {
+		usuario.setSenha("");
 		return this;
 	}
 	
