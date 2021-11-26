@@ -1,4 +1,4 @@
-package br.com.gustavo.controllers.utils.validation;
+package br.com.gustavo.controllers.validacao;
 
 import br.com.gustavo.controllers.exceptions.InputInvalidoException;
 import br.com.gustavo.controllers.exceptions.TipoInputInvalidoException;

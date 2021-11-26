@@ -1,4 +1,4 @@
-package br.com.gustavo.controllers.utils.validation;
+package br.com.gustavo.controllers.validacao;
 
 import javax.enterprise.context.RequestScoped;
 

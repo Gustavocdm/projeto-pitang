@@ -1,4 +1,4 @@
-package br.com.gustavo.controllers.filters;
+package br.com.gustavo.filters;
 
 import java.io.IOException;
 
