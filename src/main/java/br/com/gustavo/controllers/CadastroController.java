@@ -7,7 +7,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.gustavo.controllers.exceptions.InputInvalidoException;
 import br.com.gustavo.controllers.sessao.LoginSessao;
+import br.com.gustavo.controllers.validacao.Validacao;
 import br.com.gustavo.dominio.model.Telefone;
 import br.com.gustavo.dominio.model.Usuario;
 import br.com.gustavo.dominio.usecases.CadastroUsuario;
@@ -26,6 +28,8 @@ public class CadastroController implements Serializable {
 	@Inject
 	private LoginSessao loginSessao;
 	
+	@Inject
+	private Validacao<Usuario> validacao;	
 	
 	@PostConstruct
 	public void setup() {
@@ -34,6 +38,13 @@ public class CadastroController implements Serializable {
 	
 	public String cadastrar() {
 		try {
+			InputInvalidoException validado = validacao.validar(usuario);
+			
+			if (validado != null) {
+				System.out.println(validado.getMessage());
+				return "";
+			}
+			
 			usuario = cadastroUsuario.cadastrarUsuario(usuario);
 			
 			if (usuario != null) {

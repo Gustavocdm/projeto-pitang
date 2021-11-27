@@ -70,6 +70,16 @@ public class UsuarioValidacaoBuilderTest {
 		
 		assertNotNull(retorno);
 	}
+	@Test
+	public void deveRetornarInputInvalidoExceptionSeAlgumNumeroTelefoneEstiverVazio() {
+		Usuario usuario = umUsuario().pegar();
+		Telefone telefone = umTelefone().comNumero("").pegar();
+		usuario.setTelefones(Arrays.asList(telefone));
+		
+		InputInvalidoException retorno = sut.validar(usuario);
+		
+		assertNotNull(retorno);
+	}
 	
 	@Test
 	public void deveRetornarInputInvalidoExceptionComMensagemCorretaSeEmailComFormatoInvalido() {
