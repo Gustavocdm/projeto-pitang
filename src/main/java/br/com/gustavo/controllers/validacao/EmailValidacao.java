@@ -8,11 +8,11 @@ public class EmailValidacao implements Validacao<String> {
 	
 	@Override
 	public InputInvalidoException validar(String input) {
-		if (! input.matches(EMAIL_PADRAO)) {
-			return new InputInvalidoException("Email inválido.");
+		if (input.matches(EMAIL_PADRAO)) {
+			return null;
 		}
 		
-		return null;
+		return new InputInvalidoException("Email inválido.");		
 	}
 
 }

@@ -7,7 +7,7 @@ import br.com.gustavo.dominio.model.Usuario;
 
 public class UsuarioDddValidacao extends CadastroUsuarioValidacao<Integer> {
 
-	protected UsuarioDddValidacao() {
+	public UsuarioDddValidacao() {
 		super(new DddValidacao());
 	}
 

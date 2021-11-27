@@ -10,8 +10,8 @@ public class StringNaoNulaValidacao implements Validacao<String> {
 		this.inputName = inputName;
 	}
 	
-	public void setInputName(String inputName) {
-		this.inputName = inputName;
+	public String getInputName() {
+		return inputName;
 	}
 	
 	@Override

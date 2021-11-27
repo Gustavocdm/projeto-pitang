@@ -1,6 +1,7 @@
 package br.com.gustavo.builders;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.gustavo.dominio.model.Telefone;
 import br.com.gustavo.dominio.model.Usuario;
@@ -15,7 +16,7 @@ public class UsuarioBuilder {
 		builder.usuario = new Usuario();
 		builder.usuario.setId(1);
 		builder.usuario.setNome("nome");
-		builder.usuario.setEmail("email");
+		builder.usuario.setEmail("email_correto@hotmail.com");
 		builder.usuario.setSenha("senha");
 		builder.usuario.setTelefones(new ArrayList<Telefone>());
 		return builder;
@@ -31,8 +32,23 @@ public class UsuarioBuilder {
 		return this;
 	}
 	
+	public UsuarioBuilder comTelefones(List<Telefone> telefones) {
+		usuario.setTelefones(telefones);
+		return this;
+	}
+	
 	public UsuarioBuilder semSenha() {
 		usuario.setSenha("");
+		return this;
+	}
+	
+	public UsuarioBuilder comNome(String nome) {
+		usuario.setNome(nome);
+		return this;
+	}
+	
+	public UsuarioBuilder comEmail(String email) {
+		usuario.setEmail(email);
 		return this;
 	}
 	

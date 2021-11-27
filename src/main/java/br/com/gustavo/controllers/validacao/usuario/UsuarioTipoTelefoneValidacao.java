@@ -7,7 +7,7 @@ import br.com.gustavo.dominio.model.Usuario;
 
 public class UsuarioTipoTelefoneValidacao extends CadastroUsuarioValidacao<String> {
 
-	protected UsuarioTipoTelefoneValidacao() {
+	public UsuarioTipoTelefoneValidacao() {
 		super(new TipoTelefoneValidacao());
 	}
 

@@ -5,6 +5,10 @@ import br.com.gustavo.controllers.validacao.usuario.CadastroUsuarioValidacao;
 import br.com.gustavo.controllers.validacao.usuario.UsuarioComEmailValidacao;
 import br.com.gustavo.controllers.validacao.usuario.UsuarioComNomeValidacao;
 import br.com.gustavo.controllers.validacao.usuario.UsuarioComSenhaValidacao;
+import br.com.gustavo.controllers.validacao.usuario.UsuarioDddValidacao;
+import br.com.gustavo.controllers.validacao.usuario.UsuarioEmailFormatoValidacao;
+import br.com.gustavo.controllers.validacao.usuario.UsuarioNumeroTelefoneValidacao;
+import br.com.gustavo.controllers.validacao.usuario.UsuarioTipoTelefoneValidacao;
 import br.com.gustavo.dominio.model.Usuario;
 
 public class UsuarioValidacaoBuilder implements Validacao<Usuario> {
@@ -15,10 +19,10 @@ public class UsuarioValidacaoBuilder implements Validacao<Usuario> {
 		CadastroUsuarioValidacao comNome = new UsuarioComNomeValidacao();
 		CadastroUsuarioValidacao comEmail = new UsuarioComEmailValidacao();
 		CadastroUsuarioValidacao comSenha= new UsuarioComSenhaValidacao();
-		CadastroUsuarioValidacao comEmailFormato= new UsuarioComNomeValidacao();
-		CadastroUsuarioValidacao comDddsCorreto = new UsuarioComNomeValidacao();
-		CadastroUsuarioValidacao comNumerosTelefoneCorreto = new UsuarioComNomeValidacao();
-		CadastroUsuarioValidacao comTiposTelefoneCorreto = new UsuarioComNomeValidacao();
+		CadastroUsuarioValidacao comEmailFormato= new UsuarioEmailFormatoValidacao();
+		CadastroUsuarioValidacao comDddsCorreto = new UsuarioDddValidacao();
+		CadastroUsuarioValidacao comNumerosTelefoneCorreto = new UsuarioNumeroTelefoneValidacao();
+		CadastroUsuarioValidacao comTiposTelefoneCorreto = new UsuarioTipoTelefoneValidacao();
 		
 		
 		comNome.setarProximaValidacao(comEmail);
