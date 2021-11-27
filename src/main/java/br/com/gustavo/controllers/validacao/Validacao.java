@@ -1,8 +1,7 @@
 package br.com.gustavo.controllers.validacao;
 
 import br.com.gustavo.controllers.exceptions.InputInvalidoException;
-import br.com.gustavo.controllers.exceptions.TipoInputInvalidoException;
 
-public interface Validacao {
-	public InputInvalidoException validar(Object input)  throws TipoInputInvalidoException;
+public interface Validacao <T> {
+	public InputInvalidoException validar(T input);
 }

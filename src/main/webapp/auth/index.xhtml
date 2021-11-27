@@ -17,27 +17,27 @@
 
 			<p:menubar>
 			
-				<p:submenu label="Gustavo" icon="pi pi-fw pi-user">
-					<p:menuitem value="Editar" icon="pi pi-fw pi-user-edit" />
-					<p:menuitem value="Remover" icon="pi pi-fw pi-user-minus" />
+				<p:submenu label="#{loginSessao.usuarioLogado.nome}" icon="pi pi-fw pi-user">
+					<p:menuitem value="Editar" icon="pi pi-fw pi-user-edit" action="/auth/update.xhtml?faces-redirect=true" />
+					<p:menuitem value="Remover" icon="pi pi-fw pi-user-minus" action="#{indexController.deletarUsuario()}" ajax="false" />
 				</p:submenu>
 
 				<f:facet name="options">
-					<p:button value="Logout" icon="pi pi-fw pi-sign-out"
-						styleClass="ui-button-info" />
+					<p:commandButton value="Logout" icon="pi pi-fw pi-sign-out"
+						styleClass="ui-button-info" action="#{loginSessao.deslogarUsuarioDaSessao()}" />
 				</f:facet>
 			</p:menubar>
 			
-			<p:dataTable id="usuarios" var="usuario" value="#{indexController.usuarios}" rowKey="#{usuario.id}">
-            <f:facet name="header">
-                RightClick to View Options
-            </f:facet>
+			<p:dataTable id="usuarios" var="usuario" value="#{indexController.usuarios}" rowKey="#{usuario.id}" styleClass="mt-5">
 
             <p:column headerText="Id">
                 <h:outputText value="#{usuario.id}" />
             </p:column>
             <p:column headerText="Name">
                 <h:outputText value="#{usuario.nome}" />
+            </p:column>
+            <p:column headerText="Email">
+                <h:outputText value="#{usuario.email}" />
             </p:column>
             <p:column headerText="Email">
                 <h:outputText value="#{usuario.email}" />
