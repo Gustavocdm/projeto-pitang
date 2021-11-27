@@ -30,7 +30,7 @@
   
   <filter>
   	<filter-name>LoginFilter</filter-name>
-  	<filter-class>br.com.gustavo.controllers.filters.LoginFilter</filter-class>
+  	<filter-class>br.com.gustavo.filters.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>LoginFilter</filter-name>

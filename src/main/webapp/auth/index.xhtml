@@ -16,36 +16,43 @@
 			<p:growl id="messages" />
 
 			<p:menubar>
-			
-				<p:submenu label="#{loginSessao.usuarioLogado.nome}" icon="pi pi-fw pi-user">
-					<p:menuitem value="Editar" icon="pi pi-fw pi-user-edit" action="/auth/update.xhtml?faces-redirect=true" />
-					<p:menuitem value="Remover" icon="pi pi-fw pi-user-minus" action="#{indexController.deletarUsuario()}" ajax="false" />
+
+				<p:submenu label="#{loginSessao.usuarioLogado.nome}"
+					icon="pi pi-fw pi-user">
+					<p:menuitem value="Editar" icon="pi pi-fw pi-user-edit"
+						action="/auth/update.xhtml?faces-redirect=true" />
+					<p:menuitem value="Remover" icon="pi pi-fw pi-user-minus"
+						action="#{indexController.deletarUsuario()}" ajax="false" />
 				</p:submenu>
 
 				<f:facet name="options">
 					<p:commandButton value="Logout" icon="pi pi-fw pi-sign-out"
-						styleClass="ui-button-info" action="#{loginSessao.deslogarUsuarioDaSessao()}" />
+						styleClass="ui-button-info"
+						action="#{loginSessao.deslogarUsuarioDaSessao()}" />
 				</f:facet>
 			</p:menubar>
-			
-			<p:dataTable id="usuarios" var="usuario" value="#{indexController.usuarios}" rowKey="#{usuario.id}" styleClass="mt-5">
 
-            <p:column headerText="Id">
-                <h:outputText value="#{usuario.id}" />
-            </p:column>
-            <p:column headerText="Name">
-                <h:outputText value="#{usuario.nome}" />
-            </p:column>
-            <p:column headerText="Email">
-                <h:outputText value="#{usuario.email}" />
-            </p:column>
-            <p:column headerText="Email">
-                <h:outputText value="#{usuario.email}" />
-            </p:column>
-            <!-- <p:column headerText="Quantity">
-                <h:outputText value="#{product.quantity}" />
-            </p:column> -->
-        </p:dataTable>
+			<p:dataTable id="usuarios" var="usuario"
+				value="#{indexController.usuarios}" rowKey="#{usuario.id}"
+				styleClass="mt-5">
+
+				<p:column headerText="Id">
+					<h:outputText value="#{usuario.id}" />
+				</p:column>
+				<p:column headerText="Name">
+					<h:outputText value="#{usuario.nome}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{usuario.email}" />
+				</p:column>
+				<p:column headerText="Telefones">
+					<ui:repeat var="telefone" value="#{usuario.telefones}"
+						varStatus="status">
+						<h:outputText
+							value="(#{telefone.tipo})#{telefone.ddd} #{telefone.numero}#{status.last ? '' : ' - '}" />
+					</ui:repeat>
+				</p:column>
+			</p:dataTable>
 		</h:form>
 	</div>
 </h:body>
